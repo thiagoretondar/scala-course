@@ -23,24 +23,18 @@ object Main {
     * Exercise 2
     */
   def balance(chars: List[Char]): Boolean = {
-    def parenthesesCounter(count: Int, ch: Char, ls: List[Char]): Int = {
 
+    def parenthesesCounter(count: Int, ch: Char, ls: List[Char]): Int = {
       var newCnt = count
 
-      if (ch == '(')
-        newCnt = count + 1
-      else if (ch == ')')
-        newCnt = count - 1
+      if (ch == '(') newCnt = count + 1
+      else if (ch == ')')  newCnt = count - 1
 
-      if (newCnt < 0)
-        newCnt
-      else if (ls.isEmpty)
-        newCnt
+      if (newCnt < 0 || ls.isEmpty) newCnt
       else parenthesesCounter(newCnt, ls.head, ls.tail)
     }
 
-    parenthesesCounter(0, 0, chars) == 0
-
+    parenthesesCounter(0, chars.head, chars.tail) == 0
   }
 
   /**
@@ -51,4 +45,5 @@ object Main {
     else if (money < 0 || cointList.isEmpty) 0
     else countChange(money, cointList.tail) + countChange(money - cointList.head, cointList)
   }
+
 }
