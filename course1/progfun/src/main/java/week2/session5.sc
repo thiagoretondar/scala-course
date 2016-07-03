@@ -13,22 +13,20 @@ object session5 {
 
     val denom = y
 
-    def add(that: Rational) =
+    def + (that: Rational) =
       new Rational(
         numer * that.denom + that.numer * denom,
         denom * that.denom)
 
-    def neg: Rational = new Rational(-numer, denom)
+    def unary_- : Rational = new Rational(-numer, denom)
 
-    def sub(that: Rational) = add(that.neg)
+    def - (that: Rational) = this + -that
 
-    def less(that: Rational) =
+    def < (that: Rational) =
       this.numer * that.denom < that.numer * this.denom
 
     def max(that: Rational) =
-      if (this.less(that)) that else this
-
-
+      if (this < that) that else this
 
     override def toString = {
       val g = gcd(numer, denom)
@@ -52,7 +50,7 @@ object session5 {
   makeString(addRational(new Rational(1, 2), new Rational(2, 3)))
 
   val y1 = new Rational(2, 3)
-  x1.add(y)
+  x1 + y
 
 
 
@@ -60,17 +58,23 @@ object session5 {
   val x = new Rational(1, 3)
   val y = new Rational(5, 7)
   val z = new Rational(3, 2)
-  x.sub(y).sub(z)
-  y.add(y)
+  x - y - z
+  y + y
 
-  x.less(y)
+  x < y
 
   x.max(y)
 
   val strange = new Rational(1, 0)
-  strange.add(strange)
+  strange + strange
 
   new Rational(2)
+
+  //  using without ()
+  //  val t1 = new Rational(4,2)
+  //  val t2 = new Rational(6,3)
+  //  val t3 = t1 add t2
+
 
 }
 
